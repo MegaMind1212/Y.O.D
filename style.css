@@ -1,0 +1,224 @@
+/* General styles */
+body {
+    margin: 0;
+    padding: 0;
+    height: 2000px;
+    background: linear-gradient(to bottom, #171717, #171717);
+    font-family: Arial, sans-serif;
+    
+  }
+
+  /* Navbar styles */
+  header {
+    padding-block: 1em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    background-color: #1B1B1B11;
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent 0 500px,
+      #eee1 500px 501px
+    );
+  }
+  header .content-fit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: min(1200px, 90vw);
+    margin: auto;
+  }
+
+  .logo a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+    background: none;
+    border: none;
+  }
+  .menu-btn:focus {
+    outline: none;
+  }
+
+  nav {
+    position: relative;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    
+  }
+  header ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  header ul li {
+    display: inline-block;
+  }
+  header a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: normal; /* Remove boldness */
+    transition: color 0.3s ease; /* Smooth hover effect */
+  }
+  header a:hover {
+    color: #73814B; /* Change color on hover */
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .menu-btn {
+      display: block;
+      order: 2;
+    }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #171717;
+      padding: 1em;
+      gap: 1em;
+      border-radius: 0.5em;
+      position-area: center;
+    }
+    .nav-links.active {
+      display: flex;
+    }
+  }
+
+  /* Fixed 3D container */
+  #container3D {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Section styles */
+  .section {
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+  }
+  .section:nth-child(odd) {
+    background: linear-gradient(to bottom, #171717, #171717);
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent 0 500px,
+      #eee1 500px 501px
+    );
+  }
+  .section:nth-child(even) {
+    background: linear-gradient(to bottom, #171717, #171717);
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent 0 500px,
+      #eee1 500px 501px
+    );
+    background-size: 100%;
+    overflow-x: hidden;
+  }
+  .title {
+  color: #FFD700;
+  font-size: 2em;
+  font-family: "devil breeze";
+  font-weight: bold;
+  position: relative;
+  text-align: left;
+}
+  @media (max-width: 768px) {
+    .title {
+      color: #FFD700;
+  font-size: 30px;
+  font-family: "devil breeze";
+  font-weight: bold;
+  position: relative;
+  text-align: left;
+    }}
+
+  .sizeButtons {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  gap: 10px; /* Add some space between the buttons */
+}
+
+  .color-button {
+  width: 80px; /* Smaller size */
+  height: 80px;
+  border-radius: 50%; /* Round shape */
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  align-items: left;
+  
+}
+ .colorButtons {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  gap: 10px; /* Add some space between the buttons */
+}
+
+  .color-button:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+.size-button {
+  width: 60px; /* Increased size */
+  height: 60px;
+  border-radius: 50%; /* Round shape */
+  border: 2px solid #000; /* Narrow black border */
+  background-color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  margin: 5px;
+}
+
+@media (max-width: 768px) {
+.size-button {
+  width: 41px; /* Increased size */
+  height: 45px;
+  border-radius: 50%; /* Round shape */
+  border: 2px solid #000; /* Narrow black border */
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  margin: 2px;
+  
+}}
+
+@media (max-width: 768px) {
+.sizeButtons {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  gap: 10px; /* Add some space between the buttons */
+}}
+.size-button:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Hover effect on size buttons */
+.size-button:active {
+  background-color: #f1f1f1;
+}

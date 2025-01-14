@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>3D Model Test</title>
+ 
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="content-fit">
+      <div class="logo">
+        <a href="#">YOD FASHION</a>
+        
+      </div>
+      <button class="menu-btn" id="menuToggle">☰</button>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#colorSelection">Color</a></li>
+          <li><a href="#sizeSelection">Size</a></li>
+          <li><a href="#designImprint">Design</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 3D Model Container -->
+  <div id="container3D"></div>
+
+  <!-- Sections -->
+  <div id="sizeSelection" class="section" style="
+      background-image:
+        url(img/LP7.png),
+        repeating-linear-gradient(
+            to right, transparent 0 500px, #73814B33 500px 501px
+        );
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding-top: 5em;">
+    
+  </div>
+  
+  <div class="section" id="colorSelection">
+    <div class="content-fit">
+        <div class="des">
+            <div class="title">Choose T-Shirt Color</div>
+            <div id="colorButtons" class="colorButtons" style="padding-top: 20px;">
+                <img src="img/black icon.png" class="color-button" id="blackTshirt" alt="Black T-shirt" />
+                <img src="img/white icon.png" class="color-button" id="whiteTshirt" alt="White T-shirt" />
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- Size Selection Section -->
+  <div class="section" id="sizeSelection">
+    <div class="content-fit">
+        <div class="des">
+            <div class="title">Select Your T-Shirt Size</div>
+            <div id="sizeButtons" class="sizeButtons" style="padding-top: 25px;">
+                <!-- Size buttons as you had earlier -->
+                <button class="size-button" id="sizeS">S</button>
+                <button class="size-button" id="sizeM">M</button>
+                <button class="size-button" id="sizeL">L</button>
+                <button class="size-button" id="sizeXL">XL</button>
+                <button class="size-button" id="sizeXXL">XXL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Design Imprint Section with Titles and Rotating Carousel -->
+<div class="section" id="designImprint">
+  <div class="content-fit">
+    <div class="des">
+      <div class="title">Click to Apply Design</div>
+      <!-- Rotating Design Selector -->
+      <section id="rotating-design-selector">
+        <style>
+          #rotating-design-selector {
+              position: relative;
+              width: 400px;
+              height: 400px;
+              overflow: visible;
+          }
+
+          .circle-container {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+          }
+
+          .circle {
+              position: absolute;
+              top: 4;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              background-image: url('img/circle.png'); /* Add your circle image here */
+              background-size: cover;
+              animation: rotate-bg 16s linear infinite; /* Slow rotation */
+          }
+
+          .image-holder {
+              position: absolute;
+              padding-top: 80px;
+              width: 80px;
+              height: 100px;
+              transform-origin: center;
+              transform: translate(-50%, -50%);
+          }
+
+          .image-holder img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 5px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
+
+          @keyframes rotate-bg {
+              0% {
+                  transform: rotate(0deg);
+              }
+              100% {
+                  transform: rotate(360deg);
+              }
+          }
+      </style>
+
+        <div class="circle-container" style="padding-top: 30px;">
+          <div class="circle"></div>
+
+          <!-- Image Holders Positioned at the Edge of the Circle -->
+          <div class="image-holder" data-angle="0"><img src="img/IMG-20241230-WA0004.jpg" alt="Design 1"></div>
+          <div class="image-holder" data-angle="45"><img src="img/IMG-20241230-WA0005.jpg" alt="Design 2"></div>
+          <div class="image-holder" data-angle="90"><img src="img/IMG-20241230-WA0006.png" alt="Design 3"></div>
+          <div class="image-holder" data-angle="135"><img src="img/IMG-20241230-WA0007.jpg" alt="Design 4"></div>
+          <div class="image-holder" data-angle="180"><img src="img/IMG-20241230-WA0008.jpg" alt="Design 5"></div>
+          <div class="image-holder" data-angle="225"><img src="img/IMG-20241230-WA0009.jpg" alt="Design 6"></div>
+          <div class="image-holder" data-angle="270"><img src="img/IMG-20241230-WA0010.jpg" alt="Design 7"></div>
+          <div class="image-holder" data-angle="315"><img src="img/IMG-20241230-WA0006.png" alt="Design 8"></div>
+        </div>
+
+        <script>
+          (function () {
+            const imageHolders = document.querySelectorAll('#rotating-design-selector .image-holder');
+            const radius = 180; // Distance of images from center
+            const centerX = 200; // Center x-coordinate
+            const centerY = 200; // Center y-coordinate
+
+            let isDragging = false;
+            let previousX = 0;
+
+            // Function to position images around the circle
+            function positionImages() {
+              imageHolders.forEach(holder => {
+                const angle = parseFloat(holder.getAttribute('data-angle'));
+                const radians = (angle * Math.PI) / 180;
+
+                // Calculate x and y positions based on the circle
+                const x = centerX + radius * Math.cos(radians);
+                const y = centerY + radius * Math.sin(radians);
+
+                // Position each image-holder
+                holder.style.left = `${x}px`;
+                holder.style.top = `${y}px`;
+
+                // Do not rotate the images themselves, ensure they stay upright
+                holder.style.transform = `translate(-50%, -50%)`; // Remove rotation
+              });
+            }
+
+            // Rotate the images and circle automatically
+            function rotate() {
+              imageHolders.forEach(holder => {
+                let angle = parseFloat(holder.getAttribute('data-angle'));
+                angle = (angle + 0.2) % 360; // Slow rotation speed
+                holder.setAttribute('data-angle', angle);
+              });
+
+              // Reposition images
+              positionImages();
+
+              // Continuously update animation
+              requestAnimationFrame(rotate);
+            }
+
+            // Start auto-rotation
+            positionImages();
+            rotate();
+
+            // Start manual rotation when dragging starts
+            document.getElementById('rotating-design-selector').addEventListener('mousedown', (e) => {
+              isDragging = true;
+              previousX = e.clientX;
+              e.preventDefault(); // Prevent text selection while dragging
+              document.body.style.cursor = 'grabbing';
+            });
+
+            // Update manual rotation during dragging
+            document.addEventListener('mousemove', (e) => {
+              if (isDragging) {
+                const deltaX = e.clientX - previousX;
+                previousX = e.clientX;
+
+                // Update the angle of rotation based on mouse movement
+                imageHolders.forEach(holder => {
+                  let angle = parseFloat(holder.getAttribute('data-angle'));
+                  angle = (angle + deltaX * 0.2) % 360; // Adjust rotation speed
+                  holder.setAttribute('data-angle', angle);
+                });
+
+                // Reposition images after rotation
+                positionImages();
+              }
+            });
+
+            // Stop manual rotation when the user stops dragging
+            document.addEventListener('mouseup', () => {
+              isDragging = false;
+              document.body.style.cursor = 'grab';
+            });
+          })();
+        </script>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div style="width: 100%; max-width: 450px; margin: 0 auto; padding: 20px; text-align: center; background-color: #171717; color: #FDE1C7; font-family: 'Poppins', sans-serif; box-sizing: border-box; overflow: hidden;" id="unique-contact-section">
+  <div style="font-size: 2.8em; font-weight: bold; margin-bottom: 10px;">04</div>
+  <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;">CONTACT</div>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 0 auto;" id="unique-contact-table">
+    <tr>
+      <td style="padding: 12px 0; text-align: left; font-size: 1.2em; white-space: nowrap;">Email</td>
+      <td style="padding: 12px 0; text-align: right; font-size: 1.2em; white-space: nowrap;">test@gmail.com</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 0; text-align: left; font-size: 1.2em; white-space: nowrap;">Phone</td>
+      <td style="padding: 12px 0; text-align: right; font-size: 1.2em; white-space: nowrap;">+841231235</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 0; text-align: left; font-size: 1.2em; white-space: nowrap;">Website</td>
+      <td style="padding: 12px 0; text-align: right; font-size: 1.2em; white-space: nowrap;">yashdev.com</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 0; text-align: left; font-size: 1.2em; white-space: nowrap;">YouTube</td>
+      <td style="padding: 12px 0; text-align: right; font-size: 1.2em; white-space: nowrap;">@yashhhtalks</td>
+    </tr>
+  </table>
+
+  <div style="margin-top: 30px; font-size: 1.7em; font-family: 'Bimbo', sans-serif;">yod fashion</div>
+</div>
+
+<style>
+  @import url('https://fonts.cdnfonts.com/css/poppins');
+  @import url('https://fonts.cdnfonts.com/css/bimbo');
+
+  /* Mobile View Fix */
+  @media (max-width: 480px) {
+    div#unique-contact-section {
+      width: 90% !important; /* Fix extra space issue */
+      max-width: 100% !important;
+      padding: 10px !important; /* Reduce padding for better fit */
+    }
+    table#unique-contact-table td {
+      font-size: 0.85em !important; /* Reduce font size for mobile */
+      padding: 8px 0 !important; /* Less spacing for compact look */
+    }
+    div#unique-contact-section div[style*="font-size: 2.8em;"] {
+      font-size: 1.8em !important;
+    }
+    div#unique-contact-section div[style*="font-size: 2em;"] {
+      font-size: 1.3em !important;
+    }
+    div#unique-contact-section div[style*="font-size: 1.7em;"] {
+      font-size: 1.1em !important;
+    }
+  }
+
+  /* Desktop View Enhancements */
+  @media (min-width: 481px) {
+    table#unique-contact-table td {
+      font-size: 1.4em !important; /* Increase font size for desktop */
+      padding: 20px 0 !important; /* More spacing between rows */
+    }
+  }
+</style>
+
+<div class="section" id="boxLid" style="
+    position: relative;
+    z-index: 1000; /* Ensures it is above the 3D model */
+    background: url('img/cart.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+">
+    <div style="
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        
+        border-radius: 10px;
+        
+    ">
+        <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;">Ready to Wrap It Up?</div>
+        <p style="font-size: 1.2em; margin-bottom: 30px;">
+            Get your T-shirt customized and delivered to your doorstep.
+        </p>
+        <a href="tshirt (razorpay)/index.html" style="
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #000;
+            background: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        ">
+            Go to Cart
+        </a>
+    </div>
+</div>
+
+
+
+  <script>
+    // Menu toggle functionality
+    const menuBtn = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+  <!-- Ensure the 3D model loader script remains intact -->
+  <script type="module" src="app.js"></script>
+
+</body>
+</html>

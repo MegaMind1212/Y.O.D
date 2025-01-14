@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Razorpay Checkout</title>
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #30007B, #080015);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+
+        /* Container */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            gap: 20px;
+        }
+
+        /* Left and Right Sections */
+        .box {
+            flex: 1;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .left-section {
+            height: 680px; /* Adjusted Height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensure the button stays at the bottom */
+        }
+
+        .right-section {
+            height: 680px; /* Match height with the left-section */
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2b2d42;
+            text-align: left;
+            width: 100%;
+        }
+
+        /* Form Styles */
+        .form-container {
+            text-align: left;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6c63ff;
+            box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+        }
+
+        .policy-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+            color: #888;
+            text-decoration: none;
+        }
+
+        .policy-link:hover {
+            color: #6c63ff;
+        }
+
+        /* Summary Styles */
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-pay {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .btn-pay:hover {
+            background-color: #5a54e0;
+        }
+
+        .btn-form {
+            display: inline-block;
+            width: auto; /* Adjusts the button width to fit content */
+            padding: 8px 30px; /* Adjust padding to reduce size */
+            font-size: 16px; /* Reduce font size */
+            font-weight: 600;
+            color: #fff;
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-top: auto; /* Makes button stick to the bottom */
+            position: relative; /* For positioning the spinner */
+        }
+
+        .btn-form:hover {
+            background-color: #e6ef4a;
+        }
+
+        /* Spinner Styles */
+        .spinner {
+            position: absolute;
+            right: -40px; /* Position the spinner beside the button */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden initially */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .gstn {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
+            font-style: italic;
+            width: 100%;
+        }
+
+        .dotted-line {
+            border-bottom: 1px dotted #ddd;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Left Section (Form) -->
+        <div class="box left-section">
+            <h2>Complete Your Order</h2>
+            <div class="form-container">
+                <form name="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Shipping Address</label>
+                        <input type="text" name="address" id="address" placeholder="Enter your address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Mobile Number</label>
+                        <input type="tel" name="phone" id="phone" placeholder="+91 Enter your mobile number" value="+91 " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product">Product</label>
+                        <input type="text" name="product" id="product" value="Premium T-Shirt" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount (INR)</label>
+                        <input type="number" name="amount" id="amount" value="500" readonly>
+                    </div>
+                    <button type="submit" class="btn-form">Submit</button>
+                    <div class="spinner" id="spinner"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Section (Order Summary) -->
+        <div class="box right-section">
+            <h2>Order Summary</h2>
+            <div class="summary-item">
+                <span>Product:</span>
+                <span>Premium T-Shirt</span>
+            </div>
+            <div class="summary-item">
+                <span>Amount (INR):</span>
+                <span>500</span>
+            </div>
+            <div class="summary-item">
+                <span>Shipping:</span>
+                <span>Free</span>
+            </div>
+            <div class="summary-item">
+                <span><strong>Total:</strong></span>
+                <span><strong>500</strong></span>
+            </div>
+            <div class="dotted-line"></div>
+            <div class="gstn">
+                GSTN: 29ABCDE1234F1Z5
+            </div>
+            <button type="button" class="btn-pay">Pay Now</button>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzT4K04SWgThoRHd84BLCc3P5AFGihGrUI3GZ0_cuTEptHU0lDeXeNjV5_NkOAYeuNY/exec';
+        const form = document.forms['contact-form'];
+        const spinner = document.getElementById('spinner');
+        const submitButton = document.querySelector('.btn-form');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            // Show the spinner and disable the submit button
+            spinner.style.display = 'inline-block';
+            submitButton.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    alert("Thank you! Form is submitted");
+                    submitButton.disabled = false; // Enable the submit button after the response
+                    spinner.style.display = 'none'; // Hide the spinner
+                    form.reset(); // Reset the form
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    submitButton.disabled = false;
+                    spinner.style.display = 'none'; // Hide the spinner in case of an error
+                });
+        });
+    </script>
+</body>
+</html>

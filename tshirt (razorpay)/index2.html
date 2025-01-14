@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .main {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .container {
+      position: relative;
+    }
+    #exit {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+    .heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .heading h1 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .exp-cvc {
+      display: flex;
+      gap: 20px;
+    }
+    .expiration, .security {
+      flex: 1;
+    }
+    .btn {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .btn svg {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="container">
+      <svg id="exit" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.35288 8.95043C4.00437 6.17301 6.17301 4.00437 8.95043 3.35288C10.9563 2.88237 13.0437 2.88237 15.0496 3.35288C17.827 4.00437 19.9956 6.17301 20.6471 8.95044C21.1176 10.9563 21.1176 13.0437 20.6471 15.0496C19.9956 17.827 17.827 19.9956 15.0496 20.6471C13.0437 21.1176 10.9563 21.1176 8.95044 20.6471C6.17301 19.9956 4.00437 17.827 3.35288 15.0496C2.88237 13.0437 2.88237 10.9563 3.35288 8.95043Z" stroke="#1B1B1B" stroke-width="1.5"/>
+        <path d="M13.7678 10.2322L10.2322 13.7678M13.7678 13.7678L10.2322 10.2322" stroke="#1B1B1B" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+
+      <div class="heading">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="..." fill="#1B1B1B" />
+        </svg>
+        <h1>Payment Details</h1>
+      </div>
+
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Name" />
+
+      <label for="card">Card Number</label>
+      <input type="text" minlength="16" maxlength="16" id="card" name="card" placeholder="0000 0000 0000 0000" />
+
+      <div class="exp-cvc">
+        <div class="expiration">
+          <label for="expiry">Expiration Date</label>
+          <input class="inputCard" name="expiry" id="expiry" type="text" required placeholder="MM/YY" />
+        </div>
+        <div class="security">
+          <label for="cvc">CVC</label>
+          <input type="text" minlength="3" maxlength="4" id="cvc" name="cvc" placeholder="XXX" />
+        </div>
+      </div>
+
+      <div class="btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="..." stroke="#1B1B1B" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
