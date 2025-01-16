@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive T-Shirt Designer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url(img/cart.png),
+            repeating-linear-gradient(to right, transparent 0 500px, #73814B33 500px 501px);
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-top: 5em;
+            height: 100vh;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2em;
+        }
+
+        .tshirt-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            gap: 20px;
+        }
+
+        .tshirt-wrapper {
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tshirt-image {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+        }
+
+        .design {
+            position: absolute;
+            top: 46%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .color-buttons button, .toggle-display button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .color-buttons button.white {
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .color-buttons button.black {
+            background-color: black;
+            color: white;
+        }
+
+        .design-gallery {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            cursor: grab;
+        }
+
+        .carousel-item {
+            width: 80px;
+            height: 80px;
+            margin: 0 10px;
+            cursor: pointer;
+            object-fit: cover;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.1);
+            border-color: #007bff;
+        }
+
+        .carousel-arrow {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .carousel-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .arrows-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .carousel-arrow.left {
+            margin-right: 20px;
+        }
+
+        .carousel-arrow.right {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px; color: #FDE1C7; font-family: 'Poppins', sans-serif;">
+        Customize T-Shirt with Y.O.D
+    </div>
+
+    <!-- T-Shirt Container -->
+    <div class="tshirt-container">
+        <div class="tshirt-wrapper">
+            <img id="frontTshirt" class="tshirt-image" src="img/frontwhite.png" alt="Front T-Shirt">
+            <img id="frontDesign" class="design" src="img/yodl.png" alt="Front Design" style="display: block;">
+        </div>
+        <div class="tshirt-wrapper">
+            <img id="backTshirt" class="tshirt-image" src="img/backwhite2.png" alt="Back T-Shirt">
+            <img id="backDesign" class="design" src="img/yodl.png" alt="Back Design" style="display: block;">
+        </div>
+    </div>
+
+    <!-- Color Buttons -->
+    <div class="color-buttons">
+        <button class="white" onclick="changeColor('white')">White</button>
+        <button class="black" onclick="changeColor('black')">Black</button>
+    </div>
+
+    <!-- Design Gallery (Carousel) -->
+    <div class="design-gallery">
+        <div class="carousel-container" id="carousel-container">
+            <img src="img/IMG-20241230-WA0004.jpg" alt="Design 1" onclick="applyDesign('img/d1.png')" class="carousel-item">
+            <img src="img/IMG-20241230-WA0005.jpg" alt="Design 2" onclick="applyDesign('img/d3.png')" class="carousel-item">
+            <img src="img/IMG-20241230-WA0006_old.jpg" alt="Design 3" onclick="applyDesign('img/d2.png')" class="carousel-item">
+            <img src="img/IMG-20241230-WA0007.jpg" alt="Design 4" onclick="applyDesign('img/d4.png')" class="carousel-item">
+            <img src="img/IMG-20241230-WA0008.jpg" alt="Design 5" onclick="applyDesign('img/d5.png')" class="carousel-item">
+            <img src="img/IMG-20241230-WA0009.jpg" alt="Design 6" onclick="applyDesign('img/d6.png')" class="carousel-item">
+            <img src="img/IMG-20241230-WA0010.jpg" alt="Design 7" onclick="applyDesign('img/d7.png')" class="carousel-item">
+        </div>
+    </div>
+
+    <!-- Arrows Below Carousel -->
+    <div class="arrows-container">
+        <button class="carousel-arrow left" onclick="moveCarousel(-1)">&#10094;</button>
+        <button class="carousel-arrow right" onclick="moveCarousel(1)">&#10095;</button>
+    </div>
+
+    <!-- Toggle Display -->
+    <div class="toggle-display">
+        <button onclick="toggleDesignDisplay('front')">Show on Front T-Shirt</button>
+        <button onclick="toggleDesignDisplay('back')">Show on Back T-Shirt</button>
+        <button onclick="toggleDesignDisplay('both')">Show on Both</button>
+    </div>
+
+    
+<div class="section" id="boxLid" style="
+position: relative;
+z-index: 1000; /* Ensures it is above the 3D model */
+background: url('img/black.png') no-repeat center center;
+background-size: cover;
+color: rgb(244, 240, 240);
+padding: 60px 20px;
+text-align: center;
+width: 100%;
+box-sizing: border-box;
+box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+overflow: hidden;
+">
+<div style="
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    
+    border-radius: 10px;
+    
+">
+    <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;">Ready to Wrap It Up?</div>
+    <p style="font-size: 1.2em; margin-bottom: 30px;">
+        Get your T-shirt customized and delivered to your doorstep.
+    </p>
+    <a href="tshirt (razorpay)/index.html" style="
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 1em;
+        font-weight: bold;
+        color: #000;
+        background: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    ">
+        Go to Cart
+    </a>
+</div>
+</div>
+
+<!-- tshirt (razorpay)/index.html -->
+
+<script>
+// Menu toggle functionality
+const menuBtn = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+</script>
+
+
+
+    <script>
+        // Declare global design variable
+        let selectedDesign = 'img/yodl.png'; // Default design
+
+        // Function to change T-shirt color
+        function changeColor(color) {
+            const frontTshirt = document.getElementById('frontTshirt');
+            const backTshirt = document.getElementById('backTshirt');
+            frontTshirt.src = color === 'white' ? 'img/frontwhite.png' : 'img/frontblack.png';
+            backTshirt.src = color === 'white' ? 'img/backwhite2.png' : 'img/backblack.png';
+        }
+
+        // Function to apply a design to the T-shirt
+        function applyDesign(designSrc) {
+            selectedDesign = designSrc; // Store the selected design
+            const frontDesign = document.getElementById('frontDesign');
+            const backDesign = document.getElementById('backDesign');
+            frontDesign.src = selectedDesign; // Apply to front
+            frontDesign.style.display = 'block'; // Ensure visibility
+            backDesign.src = selectedDesign; // Apply to back
+            backDesign.style.display = 'block'; // Ensure visibility
+        }
+
+        // Function to toggle design display
+        function toggleDesignDisplay(displayMode) {
+            const frontDesign = document.getElementById('frontDesign');
+            const backDesign = document.getElementById('backDesign');
+
+            if (displayMode === 'front') {
+                frontDesign.style.display = 'block';
+                backDesign.style.display = 'none';
+            } else if (displayMode === 'back') {
+                backDesign.style.display = 'block';
+                frontDesign.style.display = 'none';
+            } else if (displayMode === 'both') {
+                frontDesign.style.display = 'block';
+                backDesign.style.display = 'block';
+            }
+        }
+
+        // Carousel functionality
+        let currentIndex = 0;
+        const itemsPerPage = 3;
+        const carouselContainer = document.getElementById('carousel-container');
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+
+        function moveCarousel(direction) {
+            currentIndex += direction;
+
+            // Looping behavior: Wrap around when reaching the end
+            if (currentIndex < 0) {
+                currentIndex = totalItems - itemsPerPage;
+            } else if (currentIndex >= totalItems) {
+                currentIndex = 0;
+            }
+
+            updateCarouselPosition();
+        }
+
+        function updateCarouselPosition() {
+            // Calculate how much to translate the carousel container
+            const offset = -currentIndex * (items[0].offsetWidth + 20); // 20px is the margin between items
+            carouselContainer.style.transform = `translateX(${offset}px)`;
+        }
+    </script>
+</body>
+</html>

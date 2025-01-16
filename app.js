@@ -225,3 +225,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+
+function updateModelScale() {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    // Apply smaller scale on mobile
+    bee.scale.set(1, 1, 1);
+  } else {
+    // Keep original scale on desktop
+    bee.scale.set(2, 2, 2); // Change this to your original desktop scale
+  }
+}
+
+// Run on page load
+updateModelScale();
+
+// Run when window is resized
+window.addEventListener("resize", updateModelScale);
