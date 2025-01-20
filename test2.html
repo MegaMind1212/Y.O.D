@@ -267,7 +267,7 @@
             <tr>
                 <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
                 <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-                    <input id="selectedQuantity" type="number" value="1" min="1" max="50" 
+                    <input id="customQuantity" type="number" value="1" min="1" max="50" 
                            style="padding: 8px; width: 73%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px; appearance: textfield;">
                 </td>
             </tr>
@@ -304,7 +304,19 @@
     </button>
 </div>
 
-
+<!---->
+<div id="recordsContainer" style="max-width: 800px; margin: 20px auto; text-align: left; font-family: Arial, sans-serif;color: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: transparent;">
+    <h2 style="margin-bottom: 20px; color: #FDE1C7;">Order Records</h2>
+    <table id="orderRecordsTable" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Color</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Size</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Side</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
+        </tr>
+    </table>
+</div>
 
 
 
@@ -342,25 +354,15 @@
                     <option value="Design 3">Design 3</option>
                     <option value="Design 4">Design 4</option>
                     <option value="Design 5">Design 5</option>
-                    <option value="Design 6">Design 6</option>
-                    <option value="Design 7">Design 7</option>
+                    <option value="Design 5">Design 6</option>
+                    <option value="Design 5">Design 7</option>
                 </select>
             </td>
         </tr>
-        <tr>
-            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design Side</th>
-            <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-                <select id="customSide" style="padding: 10px; width: 100%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px;">
-                    <option value="Front">Front</option>
-                    <option value="Back">Back</option>
-                </select>
-            </td>
-        </tr>
-        
         <tr>
             <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
             <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-                <input id="customQuantityOrder" type="number" value="1" min="1" max="50" 
+                <input id="customQuantity" type="number" value="1" min="1" max="50" 
                        style="padding: 10px; width: 73%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px;">
             </td>
         </tr>
@@ -378,70 +380,18 @@
     });
 
     // Handle submission of custom order
-document.getElementById('submitCustomOrder').addEventListener('click', function() {
-    const color = document.getElementById('customColor').value;
-    const size = document.getElementById('customSize').value;
-    const design = document.getElementById('customDesign').value;
-    const quantity = document.getElementById('customQuantityOrder').value;
-    const side = document.getElementById('customSide').value; // Capture the design side value
+    document.getElementById('submitCustomOrder').addEventListener('click', function() {
+        const color = document.getElementById('customColor').value;
+        const size = document.getElementById('customSize').value;
+        const design = document.getElementById('customDesign').value;
+        const quantity = document.getElementById('customQuantity').value;
 
-    alert(`Custom Order Submitted!\n\nColor: ${color}\nSize: ${size}\nDesign: ${design}\nQuantity: ${quantity}\nDesign Side: ${side}`);
-
-    // Optionally, clear inputs or close the custom order section
-    document.getElementById('customOrderSection').style.display = 'none';
-
-    // Add the custom order to the records table
-    const table = document.getElementById('orderRecordsTable');
-    const newRow = table.insertRow();
-
-    // Insert the selected details into the new row
-    newRow.insertCell(0).textContent = color;
-    newRow.insertCell(1).textContent = size;
-    newRow.insertCell(2).textContent = design;
-    newRow.insertCell(3).textContent = side; // Add Design Side to the table
-    newRow.insertCell(4).textContent = quantity;
-
-     // Create the Delete button in the "Action" column
-     const deleteButtonCell = newRow.insertCell(5); // Last column for delete button
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.style.backgroundColor = '#f44336';
-    deleteButton.style.color = 'white';
-    deleteButton.style.border = 'none';
-    deleteButton.style.padding = '5px 10px';
-    deleteButton.style.borderRadius = '5px';
-    deleteButton.style.cursor = 'pointer';
-
-    // Add event listener to delete the row when clicked
-    deleteButton.addEventListener('click', function() {
-        table.deleteRow(newRow.rowIndex); // Delete the specific row
+        alert(`Custom Order Submitted!\n\nColor: ${color}\nSize: ${size}\nDesign: ${design}\nQuantity: ${quantity}`);
+        // Optionally, clear inputs or close the custom order section
+        document.getElementById('customOrderSection').style.display = 'none';
     });
-
-    // Append the button to the delete button cell
-    deleteButtonCell.appendChild(deleteButton);
-
-});
-
-
-
 </script>
 
-    <!---->
-    <div id="recordsContainer" style="max-width: 800px; margin: 20px auto; text-align: left; font-family: Arial, sans-serif;color: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: transparent;">
-        <h2 style="margin-bottom: 20px; color: #FDE1C7;">Order Records</h2>
-        <table id="orderRecordsTable" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
-            <tr>
-                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Color</th>
-                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Size</th>
-                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design</th>
-                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Side</th>
-                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
-                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Action</th> <!-- New column for Delete -->
-            </tr>
-            <!-- Records will be inserted here dynamically -->
-        </table>
-    </div>
-    
     
 
     <div class="section" id="boxLid" style="border: 1px solid #ccc; position: relative; z-index: 1000; background: #171717; background-size: cover; color: rgb(244, 240, 240); padding: 60px 20px; text-align: center; width: 100%; box-sizing: border-box; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); overflow: hidden;">
@@ -451,10 +401,8 @@ document.getElementById('submitCustomOrder').addEventListener('click', function(
                 Get your T-shirt customized and delivered to your doorstep.
             </p>
             <a href="tshirt (razorpay)/index.html" style="display: inline-block; padding: 15px 30px; font-size: 1em; font-weight: bold; color: #000; background: #fff; border-radius: 5px; text-decoration: none; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);">
-                <button style="border: #f0f0f0; background: #fff;" id="go-to-cart" onclick="sendCartData()">Go to Cart</button>
+                Go to Cart
             </a>
-            
-
         </div>
     </div>
 
@@ -466,17 +414,31 @@ document.getElementById('submitCustomOrder').addEventListener('click', function(
         let selectedSide = 'Front';
         let selectedQuantity = 1; // Default quantity
 
+// Update the selection summary in the review section
+function updateSelectionSummary() {
+    document.getElementById('selectedColor').textContent = selectedColor;
+    document.getElementById('selectedSize').textContent = selectedSize;
+    document.getElementById('selectedDesignName').textContent = selectedDesignName;
+    document.getElementById('selectedSide').textContent = selectedSide;
+    document.getElementById('customQuantity').value = selectedQuantity; // Update the quantity as well
+}
 
+
+// Function to update the quantity
+// document.getElementById('quantityDropdown').addEventListener('change', function () {
+//     selectedQuantity = this.value;
+//     updateSelectionSummary(); // Update the summary with the selected quantity
+// });
+
+
+    
         // Update the selection summary in the review section
         function updateSelectionSummary() {
     document.getElementById('selectedColor').textContent = selectedColor;
     document.getElementById('selectedSize').textContent = selectedSize;
     document.getElementById('selectedDesignName').textContent = selectedDesignName;
     document.getElementById('selectedSide').textContent = selectedSide;
-    // document.getElementById('customQuantity').value = selectedQuantity; // Update the quantity as well
-    document.getElementById('customQuantityOrder').addEventListener('input', function() {
-    selectedQuantity = this.value;  // Update global variable when the quantity is changed
-});
+    document.getElementById('customQuantity').value = selectedQuantity; // Update the quantity as well
 }
 
     
@@ -530,63 +492,19 @@ document.getElementById('submitCustomOrder').addEventListener('click', function(
     
             updateSelectionSummary(); // Update the selection UI with correct side
         }
-
-        function confirmSelection() {
-    // Get the updated value of selectedQuantity from the input field
-    selectedQuantity = document.getElementById('selectedQuantity').value;
-
-    // Create a new row for the record
-    const table = document.getElementById('orderRecordsTable');
-    const newRow = table.insertRow();
-
-    // Insert the selected details into the new row
-    newRow.insertCell(0).textContent = selectedColor;
-    newRow.insertCell(1).textContent = selectedSize;
-    newRow.insertCell(2).textContent = selectedDesignName;
-    newRow.insertCell(3).textContent = selectedSide;
-    newRow.insertCell(4).textContent = selectedQuantity;
-
-    // Optionally, show a confirmation message
-    alert(`Your selection is confirmed!\nColor: ${selectedColor}\nSize: ${selectedSize}\nDesign: ${selectedDesignName}\nDesign Side: ${selectedSide}\nQuantity: ${selectedQuantity}`);
-
-     // Create the Delete button in the "Action" column
-     const deleteButtonCell = newRow.insertCell(5); // Last column for delete button
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.style.backgroundColor = '#f44336';
-    deleteButton.style.color = 'white';
-    deleteButton.style.border = 'none';
-    deleteButton.style.padding = '5px 10px';
-    deleteButton.style.borderRadius = '5px';
-    deleteButton.style.cursor = 'pointer';
-
-    // Add event listener to delete the row when clicked
-    deleteButton.addEventListener('click', function() {
-        table.deleteRow(newRow.rowIndex); // Delete the specific row
-    });
-
-    // Append the button to the delete button cell
-    deleteButtonCell.appendChild(deleteButton);
-
-    // Reset the order after confirmation (optional)
-    resetSelection();
-}
-
-
-// Submit custom order and handle custom inputs
-document.getElementById('submitCustomOrder').addEventListener('click', function() {
-    const color = document.getElementById('customColor').value;
-    const size = document.getElementById('customSize').value;
-    const design = document.getElementById('customDesign').value;
-    const quantity = document.getElementById('customQuantityOrder').value;
-
-    // alert(`Custom Order Submitted!\n\nColor: ${color}\nSize: ${size}\nDesign: ${design}\nQuantity: ${quantity}`);
     
-    // Optionally, clear inputs or close the custom order section
-    document.getElementById('customOrderSection').style.display = 'none';
-});
+        // Confirm selection and show user choices
+        function confirmSelection() {
+            alert(`Your selection is confirmed!\n
+            Color: ${selectedColor}\n
+            Size: ${selectedSize}\n
+            Design: ${selectedDesignName}\n
+            Design Side: ${selectedSide}
+            Quantity: ${selectedQuantity}`);
+        }
+        
 
-
+    
         // Update the size chart dynamically
         function updateSizeChart() {
             const size = document.getElementById('sizeDropdown').value;
@@ -611,7 +529,24 @@ document.getElementById('submitCustomOrder').addEventListener('click', function(
         // Initialize the summary
         updateSelectionSummary();
 
-        
+        function confirmSelection() {
+    // Create a new row for the record
+    const table = document.getElementById('orderRecordsTable');
+    const newRow = table.insertRow();
+
+    // Insert the selected details into the new row
+    newRow.insertCell(0).textContent = selectedColor;
+    newRow.insertCell(1).textContent = selectedSize;
+    newRow.insertCell(2).textContent = selectedDesignName;
+    newRow.insertCell(3).textContent = selectedSide;
+    newRow.insertCell(4).textContent = selectedQuantity;
+
+    // Optionally, show a confirmation message
+    alert(`Your selection is confirmed!\nColor: ${selectedColor}\nSize: ${selectedSize}\nDesign: ${selectedDesignName}\nDesign Side: ${selectedSide}\nQuantity: ${selectedQuantity}`);
+
+    // Reset the order after confirmation (optional)
+    resetSelection();
+}
 
 function resetSelection() {
     // Reset variables to default values
@@ -625,72 +560,8 @@ function resetSelection() {
     updateSelectionSummary();
 }
 
-
-//sends cartdata
-function sendCartData() {
-    // Collect custom order data from the form fields (form inputs)
-    const cartData = {
-        tcolour: document.getElementById('customColor').value,  // Get selected color from custom form
-        tsize: document.getElementById('customSize').value,     // Get selected size from custom form
-        design_name: document.getElementById('customDesign').value,  // Get selected design from custom form
-        design_side: document.getElementById('customSide').value,    // Get selected side from custom form
-        quantity: document.getElementById('customQuantityOrder').value  // Get selected quantity from custom form
-    };
-
-    // Dynamically selected values from the cart records (3rd table)
-    const selectedColor = document.getElementById('selectedColor').textContent.trim();
-    const selectedSize = document.getElementById('selectedSize').textContent.trim();
-    const selectedDesignName = document.getElementById('selectedDesignName').textContent.trim();
-    const selectedSide = document.getElementById('selectedSide').textContent.trim();
-    const selectedQuantity = document.getElementById('customQuantityOrder').value.trim();
-
-    // Log the collected data for debugging purposes
-    console.log("Custom Order Data: ", cartData);
-    console.log("Dynamically Selected Data: ", {
-        selectedColor,
-        selectedSize,
-        selectedDesignName,
-        selectedSide,
-        selectedQuantity
-    });
-
-    // Prepare the data to be sent to the Google Sheets
-    const data = new FormData();
+    </script>
     
-    // Add custom order data to the form data
-    data.append('tcolour', cartData.tcolour);
-    data.append('tsize', cartData.tsize);
-    data.append('design_name', cartData.design_name);
-    data.append('design_side', cartData.design_side);
-    data.append('quantity', cartData.quantity);
     
-    // Add dynamically selected values to the form data
-    data.append('selectedColor', selectedColor);
-    data.append('selectedSize', selectedSize);
-    data.append('selectedDesignName', selectedDesignName);
-    data.append('selectedSide', selectedSide);
-    data.append('selectedQuantity', selectedQuantity);
-
-    // Check the final data before sending
-    console.log("Data to be sent to Sheets: ", data);
-
-    // Send the data via fetch to the Google Apps Script (replace the script URL with your actual one)
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzT4K04SWgThoRHd84BLCc3P5AFGihGrUI3GZ0_cuTEptHU0lDeXeNjV5_NkOAYeuNY/exec';
-
-    fetch(scriptURL, { method: 'POST', body: data })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Data successfully sent to Google Sheets!", data);
-            // Optionally handle the redirect to the cart page after successful form submission
-            // window.location.href = "cart_page.html";
-        })
-        .catch(error => {
-            console.error('Error sending data to Sheets:', error.message);
-        });
-}
-
-
-</script>
-
 </body>
 </html>

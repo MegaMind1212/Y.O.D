@@ -23,8 +23,14 @@ loader.load(
     bee = gltf.scene;
     scene.add(bee);
 
-    bee.position.set(0, -2.5, 0); // Lowered the y value to -2.5
-    bee.scale.set(1.7, 1.7, 1.7);
+    // Start position for mobile (adjusted vertically for better view)
+    if (window.innerWidth <= 768) {
+      bee.position.set(0, -1.5, 0);  // Mobile view: position remains as it was
+    } else {
+      bee.position.set(0, -2.5, 0);  // Desktop view: move it downward slightly (e.g., -2.5)
+    }
+
+    bee.scale.set(1.7, 1.7, 1.7); // Initial scale set to original size
 
     if (gltf.animations && gltf.animations.length > 0) {
       mixer = new THREE.AnimationMixer(bee);
@@ -33,7 +39,7 @@ loader.load(
       console.warn('No animations found in this GLTF model.');
     }
 
-    modelMove(); // Initial position of the model
+    updateModelScale(); // Update scale after model load
   },
   undefined,
   function (error) {
@@ -63,13 +69,13 @@ reRender3D();
 
 // Handling 3D Model movement on scroll
 let arrPositionModel = [
-  { id: "sizeSelection", position: { x: 0, y: -2.2, z: 0 }, rotation: { x: 0.5, y: -0.5, z: 0 } },
-  { id: "colorSelection", position: { x: 0, y: -2.2, z: 0 }, rotation: { x: 0, y: 0.5, z: 0 } },
-  { id: "designImprint", position: { x: 0, y: -2.2, z: 0 }, rotation: { x: 0.3, y: 0.5, z: 0 } },
-  { id: "contact", position: { x: 0, y: -2.2, z: 0 }, rotation: { x: 0, y: 0, z: 0 } }
+  { id: "sizeSelection", position: { x: 0, y: -1.5, z: 0 }, rotation: { x: 0.5, y: -0.5, z: 0 } },
+  { id: "colorSelection", position: { x: 0, y: -1.5, z: 0 }, rotation: { x: 0, y: 0.5, z: 0 } },
+  { id: "designImprint", position: { x: 0, y: -1.5, z: 0 }, rotation: { x: 0.3, y: 0.5, z: 0 } },
+  { id: "contact", position: { x: 0, y: -1.5, z: 0 }, rotation: { x: 0, y: 0, z: 0 } }
 ];
 
-const initialPosition = { x: 0, y: -2.5, z: 0 };
+const initialPosition = { x: 0, y: -1.5, z: 0 }; // Updated starting y value for mobile
 const initialRotation = { x: 0, y: 0, z: 0 };
 
 const modelMove = () => {
@@ -91,9 +97,10 @@ const modelMove = () => {
   if (positionActive >= 0) {
     const newCoordinates = arrPositionModel[positionActive];
 
+    // Lock the y-position to avoid jumping upwards, only modify x and z
     gsap.to(bee.position, {
       x: newCoordinates.position.x,
-      y: newCoordinates.position.y,
+      y: bee.position.y, // Keep current y position
       z: newCoordinates.position.z,
       duration: 1.5,
       ease: "power1.out"
@@ -107,9 +114,10 @@ const modelMove = () => {
       ease: "power1.out"
     });
   } else {
+    // If no section matches, keep the model in its initial position
     gsap.to(bee.position, {
       x: initialPosition.x,
-      y: initialPosition.y,
+      y: bee.position.y, // Keep current y position
       z: initialPosition.z,
       duration: 1.5,
       ease: "power1.out"
@@ -138,12 +146,85 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
-  // Adjust model's position based on mobile screen
-  if (window.innerWidth <= 768) {
-    camera.position.z = 10;  // For mobile, bring the camera closer
+  // Adjust model's position and scale after resize
+  updateModelPosition();
+  updateModelScale();
+});
+
+// Update Model Scale
+function updateModelScale() {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    // Apply smaller scale on mobile
+    if (bee) {
+      bee.scale.set(1.3, 1.3, 1.3); // Slightly smaller scale for mobile to keep the model visible and proportionate
+    }
   } else {
-    camera.position.z = 13;  // For desktop, keep the camera further
+    // Keep original scale on desktop
+    if (bee) {
+      bee.scale.set(1.7, 1.7, 1.7); // Default desktop scale
+    }
   }
+}
+
+// Adjust Model's Position Based on Screen Size
+function updateModelPosition() {
+  const isMobile = window.innerWidth <= 768;
+  
+  if (bee) {
+    if (isMobile) {
+      // Mobile Positioning (Y = -1.5 for mobile)
+      bee.position.set(0, -1.5, 0);
+    } else {
+      // Desktop Positioning (move it downwards slightly)
+      bee.position.set(0, -2.5, 0);  // Slightly adjusted downward for desktop
+    }
+  }
+}
+
+// Handle Size Selection Buttons
+document.getElementById('sizeS').addEventListener('click', () => {
+  if (window.innerWidth <= 768) {
+    bee.scale.set(1.1, 1.1, 1.1);  // Slightly reduced size for mobile S
+  } else {
+    bee.scale.set(1, 1, 1);
+  }
+  bee.position.set(0, -1.5, 0); // Ensure the model stays centered on mobile
+});
+
+document.getElementById('sizeM').addEventListener('click', () => {
+  if (window.innerWidth <= 768) {
+    bee.scale.set(1.2, 1.2, 1.2);  // Slightly reduced size for mobile M
+  } else {
+    bee.scale.set(1.2, 1.2, 1.2);
+  }
+  bee.position.set(0, -1.5, 0); // Ensure the model stays centered on mobile
+});
+
+document.getElementById('sizeL').addEventListener('click', () => {
+  if (window.innerWidth <= 768) {
+    bee.scale.set(1.4, 1.4, 1.4);  // Slightly reduced size for mobile L
+  } else {
+    bee.scale.set(1.5, 1.5, 1.5);
+  }
+  bee.position.set(0, -1.5, 0); // Ensure the model stays centered on mobile
+});
+
+document.getElementById('sizeXL').addEventListener('click', () => {
+  if (window.innerWidth <= 768) {
+    bee.scale.set(1.7, 1.7, 1.7);  // Slightly reduced size for mobile XL
+  } else {
+    bee.scale.set(1.7, 1.7, 1.7);
+  }
+  bee.position.set(0, -1.5, 0); // Ensure the model stays centered on mobile
+});
+
+document.getElementById('sizeXXL').addEventListener('click', () => {
+  if (window.innerWidth <= 768) {
+    bee.scale.set(1.8, 1.8, 1.8);  // Slightly reduced size for mobile XXL
+  } else {
+    bee.scale.set(2, 2, 2);
+  }
+  bee.position.set(0, -1.5, 0); // Ensure the model stays centered on mobile
 });
 
 // Color Selection (Black/White)
@@ -161,27 +242,6 @@ document.getElementById('whiteTshirt').addEventListener('click', () => {
       child.material.color.set('#FFFFFF'); // Change to white color
     }
   });
-});
-
-// Handle Size Selection Buttons
-document.getElementById('sizeS').addEventListener('click', () => {
-  bee.scale.set(1, 1, 1);
-});
-
-document.getElementById('sizeM').addEventListener('click', () => {
-  bee.scale.set(1.2, 1.2, 1.2);
-});
-
-document.getElementById('sizeL').addEventListener('click', () => {
-  bee.scale.set(1.5, 1.5, 1.5);
-});
-
-document.getElementById('sizeXL').addEventListener('click', () => {
-  bee.scale.set(1.7, 1.7, 1.7);
-});
-
-document.getElementById('sizeXXL').addEventListener('click', () => {
-  bee.scale.set(2, 2, 2);
 });
 
 // Design Selection (Texture Replacement)
@@ -225,20 +285,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
-
-function updateModelScale() {
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    // Apply smaller scale on mobile
-    bee.scale.set(1, 1, 1);
-  } else {
-    // Keep original scale on desktop
-    bee.scale.set(2, 2, 2); // Change this to your original desktop scale
-  }
-}
-
-// Run on page load
-updateModelScale();
-
-// Run when window is resized
-window.addEventListener("resize", updateModelScale);
