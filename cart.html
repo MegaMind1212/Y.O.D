@@ -1,34 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOD Fashion</title>
-    <link rel="stylesheet" href="style.css">
-    
-</head>
+<!-- Display Summary Section -->
+<div style="max-width: 800px; margin: 20px auto; text-align: left; font-family: Arial, sans-serif; color: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: transparent;">
+  <h2 style="margin-bottom: 20px; color: #FDE1C7;">Review Your Selections</h2>
+  <table style="width: 100%; border-collapse: collapse;">
+      <tr>
+          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Color</th>
+          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedColor">White</td>
+          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Size</th>
+          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedSize">Small</td>
+      </tr>
+      <tr>
+          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design Name</th>
+          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedDesignName">Y.O.D Logo</td>
+          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design Side</th>
+          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedSide">Front</td>
+      </tr>
+      <tr>
+          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
+          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
+              <input id="selectedQuantity" type="number" value="1" min="1" max="50" 
+                     style="padding: 8px; width: 73%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px; appearance: textfield;">
+          </td>
+      </tr>
+  </table>
+  <button onclick="confirmSelection()">Confirm Selection</button>
+</div>
 
-<body>
-    
+<script>
+  // Set default values
+  let selectedColor = 'White';
+  let selectedSize = 'Small';
+  let selectedDesign = 'd1'; // Default design (d1, d2, etc.)
+  let selectedSide = 'Front';
+  let selectedQuantity = 1;
 
-   
+  // Event listeners for color selection
+  document.getElementById('blackTshirt').addEventListener('click', () => {
+    selectedColor = 'Black';
+    updateSummary();
+  });
 
-    <div class="section" id="contact">
-        <div class="content-fit">
-            <div class="number" style="font-size: medium;">Looks Cool?</div>
-            <div class="des">
-                <div class="title">Lets Pack It!</div>
-                
-                <!-- Button to open Razorpay page in a new tab -->
-                <a href="tshirt (razorpay)/index.html" class="btn" target="_blank">Go to Cart</a>
-            </div>
-        </div>
-    </div>
-    
+  document.getElementById('whiteTshirt').addEventListener('click', () => {
+    selectedColor = 'White';
+    updateSummary();
+  });
 
+  // Event listeners for size selection
+  document.getElementById('sizeS').addEventListener('click', () => {
+    selectedSize = 'Small';
+    updateSummary();
+  });
+  document.getElementById('sizeM').addEventListener('click', () => {
+    selectedSize = 'Medium';
+    updateSummary();
+  });
+  document.getElementById('sizeL').addEventListener('click', () => {
+    selectedSize = 'Large';
+    updateSummary();
+  });
+  document.getElementById('sizeXL').addEventListener('click', () => {
+    selectedSize = 'X-Large';
+    updateSummary();
+  });
+  document.getElementById('sizeXXL').addEventListener('click', () => {
+    selectedSize = 'XX-Large';
+    updateSummary();
+  });
 
-    <script type="module" src="app.js"></script>
-</body>
+  // Event listener for design selection
+  document.querySelectorAll('#rotating-design-selector .image-holder').forEach((imageHolder) => {
+    imageHolder.addEventListener('click', (event) => {
+      // Get the design based on which image was clicked
+      const clickedImage = event.target.closest('.image-holder').querySelector('.display');
+      const designAlt = clickedImage ? clickedImage.alt : '';
+      selectedDesign = designAlt; // Set the selected design
+      updateSummary();
+    });
+  });
 
-</html>
+  // Event listener for quantity input
+  document.getElementById('selectedQuantity').addEventListener('input', () => {
+    selectedQuantity = document.getElementById('selectedQuantity').value;
+    updateSummary();
+  });
+
+  // Function to update the summary table
+  function updateSummary() {
+    document.getElementById('selectedColor').textContent = selectedColor;
+    document.getElementById('selectedSize').textContent = selectedSize;
+    document.getElementById('selectedSide').textContent = selectedSide;
+    document.getElementById('selectedQuantity').value = selectedQuantity;
+
+    // Update the design name in the table
+    document.getElementById('selectedDesignName').textContent = selectedDesign;
+  }
+
+  // Call updateSummary initially to display default values
+  updateSummary();
+</script>
