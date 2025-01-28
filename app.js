@@ -156,7 +156,7 @@ function updateModelScale() {
   if (window.matchMedia("(max-width: 768px)").matches) {
     // Apply smaller scale on mobile
     if (bee) {
-      bee.scale.set(1.3, 1.3, 1.3); // Slightly smaller scale for mobile to keep the model visible and proportionate
+      bee.scale.set(1.0, 1.0, 1.0); // Slightly smaller scale for mobile to keep the model visible and proportionate
     }
   } else {
     // Keep original scale on desktop
