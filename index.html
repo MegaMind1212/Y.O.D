@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
   <title>3D Model Test</title>
  
 </head>
@@ -12,9 +15,9 @@
   <!-- Navbar -->
   <header>
     <div class="content-fit">
-      <div style="display: flex; align-items: center; margin-top: 0px; font-size: 1.7em; font-family: 'Bimbo', sans-serif;color: #fff;">
+      <div style="display: flex; align-items: center; margin-top: 0px; font-size: 1.7em; font-family: DM Serif Text, serif;color: #fff;">
         <img src="img/IMG_0660.JPG" alt="Logo" style="width: 30px; height: auto; margin-right: 10px; ">
-        yod fashion
+        your own design
       </div>
       
       <button class="menu-btn" id="menuToggle">☰</button>
@@ -52,7 +55,7 @@
   <div class="section" id="colorSelection">
     <div class="content-fit">
         <div class="des">
-            <div class="title">Choose T-Shirt Color</div>
+            <div class="title" style="font-family: DM Serif Text, serif;">Choose T-Shirt Color</div>
             <div id="colorButtons" class="colorButtons" style="padding-top: 20px;">
                 <img src="img/black icon.png" class="color-button" id="blackTshirt" alt="Black T-shirt" />
                 <img src="img/white icon.png" class="color-button" id="whiteTshirt" alt="White T-shirt" />
@@ -64,7 +67,7 @@
   <div class="section" id="sizeSelection">
     <div class="content-fit">
         <div class="des">
-            <div class="title">Select Your T-Shirt Size</div>
+            <div class="title" style="font-family: DM Serif Text, serif;">Select Your T-Shirt Size</div>
             <div id="sizeButtons" class="sizeButtons" style="padding-top: 25px;">
                 <!-- Size buttons as you had earlier -->
                 <button class="size-button" id="sizeS">S</button>
@@ -81,7 +84,7 @@
 <div class="section" id="designImprint">
   <div class="content-fit">
     <div class="des">
-      <div class="title">Click to Apply Design</div>
+      <div class="title" style="font-family: DM Serif Text, serif;">Click to Apply Design</div>
       <!-- Rotating Design Selector -->
       <section id="rotating-design-selector">
         <style>
@@ -180,6 +183,8 @@
           </div>
         </div>
 
+        
+
         <script>
           (function () {
             const imageHolders = document.querySelectorAll('#rotating-design-selector .image-holder');
@@ -254,6 +259,17 @@
               }
             });
 
+            // Add event listener for when a design is clicked
+            imageHolders.forEach(holder => {
+              holder.addEventListener('click', function () {
+                if (!colorSelected) {
+                  alert("Please choose a color before applying a design.");
+                } else {
+                  // Your existing code to apply the design
+                  console.log('Design applied');
+                }
+              });
+            });
             
 
             // Stop manual rotation when the user stops dragging
@@ -269,9 +285,9 @@
 </div>
 
 
-<div id="contact" style="width: 100%; max-width: 450px; margin: 0 auto; padding: 20px; text-align: center; background-color: #171717; color: #FDE1C7; font-family: 'Poppins', sans-serif; box-sizing: border-box; overflow: hidden;" id="unique-contact-section">
+<div id="contact" style="width: 100%; max-width: 450px; margin: 0 auto; padding: 20px; text-align: center; background: linear-gradient(to bottom, #295764, #295764); box-shadow: none; color: #FDE1C7; font-family: 'Poppins', sans-serif; box-sizing: border-box; overflow: hidden;" id="unique-contact-section">
   <div style="font-size: 2.8em; font-weight: bold; margin-bottom: 10px;">04</div>
-  <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;">CONTACT</div>
+  <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;font-family: DM Serif Text, serif;">CONTACT</div>
 
   <table style="width: 100%; border-collapse: collapse; margin: 0 auto;" id="unique-contact-table">
     <tr>
@@ -331,13 +347,12 @@
   }
 </style>
 
-
-
+<!--Display summary section-->
 <!-- Display Summary Section -->
 <div style="
     position: relative;
     z-index: 1000; /* Ensures it is above the 3D model */
-    background: url('img/cart.png') no-repeat center center;
+    background: url('img/BGJ.png') no-repeat center center;
     background-size: cover;
     color: white;
     padding: 60px 20px;
@@ -366,537 +381,89 @@
 <div class="toggle-display">
   <button id="toggleDesignSide">Toggle Design Side</button>
 </div>
-
-
-
-
-
-
-<!-- Display Summary Section -->
-<!-- Display Summary Section -->
-<!-- Display Summary Section -->
-<div style="max-width: 800px; margin: 20px auto; text-align: left; font-family: Arial, sans-serif; color: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: transparent; position: relative; z-index: 1000;">
-  <h2 style="margin-bottom: 20px; color: #FDE1C7;">Review Your Selections</h2>
-  <table style="width: 100%; border-collapse: collapse;">
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Color</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedColor">White</td>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Size</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedSize">Small</td>
-      </tr>
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design Name</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedDesignName">Y.O.D Logo</td>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design Side</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;" id="selectedSide">Front</td>
-      </tr>
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-              <input id="selectedQuantity" type="number" value="1" min="1" max="50" 
-                     style="padding: 8px; width: 73%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px; appearance: textfield;">
-          </td>
-      </tr>
-  </table>
-  <button onclick="confirmSelection()">Confirm Selection</button>
 </div>
+<!--Display summary section-->
 
-
-<!--ADD MORE AND TABLE0-->
-<!-- Independent "Add More" Section -->
-<div style="text-align: center; margin: 20px;">
-  <button id="addMoreBtn" 
-          style="padding: 10px 20px; font-size: 1em; font-weight: bold; color: #fff; background: #333; border: none; border-radius: 5px; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-      Add More?
-  </button>
-</div>
-
-
-
-
-
-
-<div id="customOrderSection" style="display: none; max-width: 800px; margin: 20px auto; text-align: left; font-family: Arial, sans-serif; color: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: transparent;">
-  <h2 style="margin-bottom: 20px; color: #FDE1C7;">Custom Order</h2>
-  <table style="width: 100%; border-collapse: collapse;">
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Color</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-              <select id="customColor" style="padding: 10px; width: 100%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px;">
-                  <option value="White">White</option>
-                  <option value="Black">Black</option>
-              </select>
-          </td>
-      </tr>
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Size</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-              <select id="customSize" style="padding: 10px; width: 100%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px;">
-                  <option value="Small">Small</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Large">Large</option>
-                  <option value="XL">XL</option>
-                  <option value="XXL">XXL</option>
-              </select>
-          </td>
-      </tr>
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design Name</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-              <select id="customDesign" style="padding: 10px; width: 100%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px;">
-                  <option value="Design 1">Design 1</option>
-                  <option value="Design 2">Design 2</option>
-                  <option value="Design 3">Design 3</option>
-                  <option value="Design 4">Design 4</option>
-                  <option value="Design 5">Design 5</option>
-                  <option value="Design 6">Design 6</option>
-                  <option value="Design 7">Design 7</option>
-              </select>
-          </td>
-      </tr>
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design Side</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-              <select id="customSide" style="padding: 10px; width: 100%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px;">
-                  <option value="Front">Front</option>
-                  <option value="Back">Back</option>
-              </select>
-          </td>
-      </tr>
+<div class="section" id="boxLid" style="border: 1px solid #ccc; position: relative; z-index: 1000; background: url('img/BGJ.png') no-repeat center center; background-size: cover; color: rgb(244, 240, 240); padding: 60px 20px; text-align: center; width: 100%; box-sizing: border-box; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); overflow: hidden;">
+  <div style="max-width: 500px; margin: 0 auto; padding: 20px; border-radius: 10px;">
       
-      <tr>
-          <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
-          <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-              <input id="customQuantityOrder" type="number" value="1" min="1" max="50" 
-                     style="padding: 10px; width: 73%; font-size: 1em; border: 1px solid #ccc; border-radius: 5px;">
-          </td>
-      </tr>
-  </table>
-  <button id="submitCustomOrder" 
-          style="margin-top: 20px; padding: 10px 20px; font-size: 1em; font-weight: bold; color: #fff; background: #333; border: none; border-radius: 5px; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-      Confirm Custom Order
-  </button>
-</div>
+      <!-- Title: Adjust size for different screen sizes -->
+      <div style="font-size: 30px; font-weight: bold; margin-bottom: 20px; word-wrap: break-word; line-height: 1.2;font-family: DM Serif Text, serif;">
+          Need More Customizations?
+      </div>
+      
+      <!-- Text Paragraph -->
+      <p style="font-size: 1.2em; margin-bottom: 30px; font-family: DM Serif Text, serif;">
+          Get your T-shirt customized and delivered to your doorstep.
+      </p>
 
-<script>
-  // Show custom order section when "Add More?" is clicked
-  document.getElementById('addMoreBtn').addEventListener('click', function() {
-      document.getElementById('customOrderSection').style.display = 'block';
-  });
+      <!-- Buy Now Button -->
+      <a href="tshirt (razorpay)/index.html" style="display: inline-block; padding: 15px 30px; font-size: 1.2em; font-weight: bold; color: #fff; background: #ff5722; border-radius: 5px; text-decoration: none; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); margin-bottom: 20px;">
+          Buy Now
+      </a>
 
-  // Handle submission of custom order
-document.getElementById('submitCustomOrder').addEventListener('click', function() {
-  const color = document.getElementById('customColor').value;
-  const size = document.getElementById('customSize').value;
-  const design = document.getElementById('customDesign').value;
-  const quantity = document.getElementById('customQuantityOrder').value;
-  const side = document.getElementById('customSide').value; // Capture the design side value
+      <!-- Explore More Button -->
+      <a href="customizer.html" style="display: inline-block; padding: 15px 30px; font-size: 1em; font-weight: bold; color: #000; background: #fff; border-radius: 5px; text-decoration: none; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);">
+          <button style="border: #f0f0f0; background: #fff;" id="go-to-cart" onclick="sendCartData()">Explore More</button>
+      </a>
 
-  alert(`Custom Order Submitted!\n\nColor: ${color}\nSize: ${size}\nDesign: ${design}\nQuantity: ${quantity}\nDesign Side: ${side}`);
-
-  // Optionally, clear inputs or close the custom order section
-  document.getElementById('customOrderSection').style.display = 'none';
-
-  // Add the custom order to the records table
-  const table = document.getElementById('orderRecordsTable');
-  const newRow = table.insertRow();
-
-  // Insert the selected details into the new row
-  newRow.insertCell(0).textContent = color;
-  newRow.insertCell(1).textContent = size;
-  newRow.insertCell(2).textContent = design;
-  newRow.insertCell(3).textContent = side; // Add Design Side to the table
-  newRow.insertCell(4).textContent = quantity;
-
-   // Create the Delete button in the "Action" column
-   const deleteButtonCell = newRow.insertCell(5); // Last column for delete button
-  const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'Delete';
-  deleteButton.style.backgroundColor = '#f44336';
-  deleteButton.style.color = 'white';
-  deleteButton.style.border = 'none';
-  deleteButton.style.padding = '5px 10px';
-  deleteButton.style.borderRadius = '5px';
-  deleteButton.style.cursor = 'pointer';
-
-  // Add event listener to delete the row when clicked
-  deleteButton.addEventListener('click', function() {
-      table.deleteRow(newRow.rowIndex); // Delete the specific row
-  });
-
-  // Append the button to the delete button cell
-  deleteButtonCell.appendChild(deleteButton);
-
-});
-
-
-
-</script>
-
-  <!---->
-  <div id="recordsContainer" style="max-width: 800px; margin: 20px auto; text-align: left; font-family: Arial, sans-serif; color: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: transparent;">
-    <h2 style="margin-bottom: 20px; color: #FDE1C7;">Order Records</h2>
-    <div style="overflow-x: auto; position: relative;">
-        <!-- Swiper line for guiding scroll -->
-        <div style="position: absolute; top: 0; left: 0; width: 80%; height: 4px; background-color: #FDE1C7; opacity: 0.5; pointer-events: none;"></div>
-        <table id="orderRecordsTable" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd; min-width: 600px;">
-            <thead>
-                <tr>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">T-Shirt Color</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Size</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Design</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Side</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Quantity</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Action</th> <!-- New column for Delete -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Records will be inserted here dynamically -->
-            </tbody>
-        </table>
-    </div>
+      <!-- WhatsApp Enquiry Button -->
+      <a href="https://wa.me/919889019286" target="_blank" style="display: inline-block; margin-top: 30px; padding: 10px 20px; font-size: 1em; font-weight: bold; color: #fff; background-color: #25d366; border-radius: 5px; text-decoration: none; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center;">
+          <img src="img/whatsaap.png" alt="WhatsApp" style="width: 25px; height: 25px; margin-right: 10px;">
+          Enquire on WhatsApp
+      </a>
+  </div>
 </div>
 
 <style>
-    @media (max-width: 768px) {
-        #recordsContainer {
-            padding: 10px;
-        }
-
-        #orderRecordsTable {
-            min-width: 600px; /* Ensuring table doesn't shrink too small on mobile */
-        }
-
-        #orderRecordsTable th, #orderRecordsTable td {
-            padding: 8px;
-            font-size: 14px;
-        }
-
-        #orderRecordsTable thead {
-            background-color: #333;
-        }
-
-        #orderRecordsTable th {
-            color: #FDE1C7;
-            text-align: center;
-        }
-
-        /* Ensure the table is horizontally scrollable on mobile */
-        #recordsContainer div {
-            overflow-x: auto;
-        }
-
-        /* The swiper line is already in place above the table, now adjusting */
-        #recordsContainer div::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 80%;
-            height: 4px;
-            background-color: #FDE1C7;
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        /* Adjust the scrollbar on mobile */
-        #recordsContainer div::-webkit-scrollbar {
-            height: 8px;  /* Make the scrollbar thicker */
-        }
-
-        #recordsContainer div::-webkit-scrollbar-thumb {
-            background-color: #888;  /* Color of the scrollbar */
-            border-radius: 4px;      /* Rounded corners for thumb */
-        }
-
-        #recordsContainer div::-webkit-scrollbar-track {
-            background-color: #f1f1f1; /* Track color */
-        }
-    }
-
-    /* Default desktop styles */
-    #recordsContainer {
-        max-width: 800px;
-    }
-</style>
-
-  
-  
-<!--SCRIPT FROM THE CUSTOMIZER-->
-<script>
- 
-  // Function to toggle design display
-  function toggleDesignDisplay(displayMode) {
-      const frontDesign = document.getElementById('frontDesign');
-      const backDesign = document.getElementById('backDesign');
-
-      if (displayMode === 'front') {
-          frontDesign.style.display = 'block';
-          backDesign.style.display = 'block'; 
-          backDesign.src = 'img/yodl.png'; // Keep logo on back
-          selectedSide = 'Front'; // Update the selected side to Front
-      } else if (displayMode === 'back') {
-          backDesign.src = selectedDesignSrc; // Apply design to back
-          backDesign.style.display = 'block';
-          frontDesign.style.display = 'block'; 
-          frontDesign.src = 'img/yodl.png'; // Keep logo on front
-          selectedSide = 'Back'; // Update the selected side to Back
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+      /* Make the title smaller on mobile devices */
+      #boxLid .section div:first-child {
+          font-size: 1.5em; /* Slightly smaller */
       }
 
-      updateSelectionSummary(); // Update the selection UI with correct side
+      /* Ensure all content is visible and adjusts accordingly */
+      #boxLid .section div {
+          padding: 15px; /* Reduce padding for smaller screens */
+      }
+
+      /* Reduce button size on mobile */
+      #boxLid .section a {
+          font-size: 1em;
+          padding: 12px 25px;
+      }
+
+      /* Adjust the width of buttons */
+      #boxLid .section a {
+          width: 100%;
+          text-align: center;
+      }
+
+      /* WhatsApp Button */
+      #boxLid .section a img {
+          width: 20px; /* Smaller WhatsApp icon */
+      }
   }
-
-  function confirmSelection() {
-// Get the updated value of selectedQuantity from the input field
-selectedQuantity = document.getElementById('selectedQuantity').value;
-
-// Create a new row for the record
-const table = document.getElementById('orderRecordsTable');
-const newRow = table.insertRow();
-
-// Insert the selected details into the new row
-newRow.insertCell(0).textContent = selectedColor;
-newRow.insertCell(1).textContent = selectedSize;
-newRow.insertCell(2).textContent = selectedDesignName;
-newRow.insertCell(3).textContent = selectedSide;
-newRow.insertCell(4).textContent = selectedQuantity;
-
-// Optionally, show a confirmation message
-alert(`Your selection is confirmed!\nColor: ${selectedColor}\nSize: ${selectedSize}\nDesign: ${selectedDesignName}\nDesign Side: ${selectedSide}\nQuantity: ${selectedQuantity}`);
-
-// Create the Delete button in the "Action" column
-const deleteButtonCell = newRow.insertCell(5); // Last column for delete button
-const deleteButton = document.createElement('button');
-deleteButton.textContent = 'Delete';
-deleteButton.style.backgroundColor = '#f44336';
-deleteButton.style.color = 'white';
-deleteButton.style.border = 'none';
-deleteButton.style.padding = '5px 10px';
-deleteButton.style.borderRadius = '5px';
-deleteButton.style.cursor = 'pointer';
-
-// Add event listener to delete the row when clicked
-deleteButton.addEventListener('click', function() {
-  table.deleteRow(newRow.rowIndex); // Delete the specific row
-});
-
-// Append the button to the delete button cell
-deleteButtonCell.appendChild(deleteButton);
-
-// Reset the order after confirmation (optional)
-resetSelection();
-}
-
-
-// Submit custom order and handle custom inputs
-document.getElementById('submitCustomOrder').addEventListener('click', function() {
-const color = document.getElementById('customColor').value;
-const size = document.getElementById('customSize').value;
-const design = document.getElementById('customDesign').value;
-const quantity = document.getElementById('customQuantityOrder').value;
-
-// alert(`Custom Order Submitted!\n\nColor: ${color}\nSize: ${size}\nDesign: ${design}\nQuantity: ${quantity}`);
-
-// Optionally, clear inputs or close the custom order section
-document.getElementById('customOrderSection').style.display = 'none';
-});
-
-
-  // Update the size chart dynamically
-  function updateSizeChart() {
-      const size = document.getElementById('sizeDropdown').value;
-      selectedSize = size;
-      updateSelectionSummary();
-  }
-
-  // Move carousel left or right
-  let carouselPosition = 0;
-  const carouselContainer = document.getElementById('carousel-container');
-  function moveCarousel(direction) {
-      const itemWidth = document.querySelector('.carousel-item').offsetWidth;
-      const gap = 20;
-      const totalWidth = itemWidth + gap;
-      carouselPosition += direction;
-      if (carouselPosition < 0) carouselPosition = 0;
-      const maxPosition = carouselContainer.children.length - 4;
-      if (carouselPosition > maxPosition) carouselPosition = maxPosition;
-      carouselContainer.style.transform = `translateX(-${carouselPosition * totalWidth}px)`;
-  }
-
-  // Initialize the summary
-  updateSelectionSummary();
-
   
+  /* For smaller devices (e.g., mobile) */
+  @media (max-width: 480px) {
+      #boxLid .section div:first-child {
+          font-size: 1.2em; /* Make title even smaller for smaller screens */
+      }
 
-function resetSelection() {
-// Reset variables to default values
-selectedColor = 'White';
-selectedSize = 'Small';
-selectedDesignName = 'Y.O.D Logo';
-selectedSide = 'Front';
-selectedQuantity = 1;
+      /* Make sure everything fits and is legible */
+      #boxLid .section p {
+          font-size: 1em;
+      }
 
-// Update the UI to reflect the reset values
-updateSelectionSummary();
-}
-
-
-//sends cartdata
-function sendCartData() {
-// Collect custom order data from the form fields (form inputs)
-const cartData = {
-  tcolour: document.getElementById('customColor').value,  // Get selected color from custom form
-  tsize: document.getElementById('customSize').value,     // Get selected size from custom form
-  design_name: document.getElementById('customDesign').value,  // Get selected design from custom form
-  design_side: document.getElementById('customSide').value,    // Get selected side from custom form
-  quantity: document.getElementById('customQuantityOrder').value  // Get selected quantity from custom form
-};
-
-// Dynamically selected values from the cart records (3rd table)
-const selectedColor = document.getElementById('selectedColor').textContent.trim();
-const selectedSize = document.getElementById('selectedSize').textContent.trim();
-const selectedDesignName = document.getElementById('selectedDesignName').textContent.trim();
-const selectedSide = document.getElementById('selectedSide').textContent.trim();
-const selectedQuantity = document.getElementById('customQuantityOrder').value.trim();
-
-// Log the collected data for debugging purposes
-console.log("Custom Order Data: ", cartData);
-console.log("Dynamically Selected Data: ", {
-  selectedColor,
-  selectedSize,
-  selectedDesignName,
-  selectedSide,
-  selectedQuantity
-});
-
-// Prepare the data to be sent to the Google Sheets
-const data = new FormData();
-
-// Add custom order data to the form data
-data.append('tcolour', cartData.tcolour);
-data.append('tsize', cartData.tsize);
-data.append('design_name', cartData.design_name);
-data.append('design_side', cartData.design_side);
-data.append('quantity', cartData.quantity);
-
-// Add dynamically selected values to the form data
-data.append('selectedColor', selectedColor);
-data.append('selectedSize', selectedSize);
-data.append('selectedDesignName', selectedDesignName);
-data.append('selectedSide', selectedSide);
-data.append('selectedQuantity', selectedQuantity);
-
-// Check the final data before sending
-console.log("Data to be sent to Sheets: ", data);
-
-// Send the data via fetch to the Google Apps Script (replace the script URL with your actual one)
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzT4K04SWgThoRHd84BLCc3P5AFGihGrUI3GZ0_cuTEptHU0lDeXeNjV5_NkOAYeuNY/exec';
-
-fetch(scriptURL, { method: 'POST', body: data })
-  .then(response => response.json())
-  .then(data => {
-      console.log("Data successfully sent to Google Sheets!", data);
-      // Optionally handle the redirect to the cart page after successful form submission
-      // window.location.href = "cart_page.html";
-  })
-  .catch(error => {
-      console.error('Error sending data to Sheets:', error.message);
-  });
-}
-
-
-</script>
-
-<!--SCRIPT FROM THE CUSTOMIZER ENDS-->
-
-
-<script>
-  // Set default values
-  let selectedColor = 'White';
-  let selectedSize = 'Small';
-  let selectedDesignName = 'd1'; // Default design (d1, d2, etc.)
-  let selectedSide = 'Front';
-  let selectedQuantity = 1;
-
-  // Event listeners for color selection
-  document.getElementById('blackTshirt').addEventListener('click', () => {
-    selectedColor = 'Black';
-    updateSummary();
-  });
-
-  document.getElementById('whiteTshirt').addEventListener('click', () => {
-    selectedColor = 'White';
-    updateSummary();
-  });
-
-  // Event listeners for size selection
-  document.getElementById('sizeS').addEventListener('click', () => {
-    selectedSize = 'Small';
-    updateSummary();
-  });
-  document.getElementById('sizeM').addEventListener('click', () => {
-    selectedSize = 'Medium';
-    updateSummary();
-  });
-  document.getElementById('sizeL').addEventListener('click', () => {
-    selectedSize = 'Large';
-    updateSummary();
-  });
-  document.getElementById('sizeXL').addEventListener('click', () => {
-    selectedSize = 'X-Large';
-    updateSummary();
-  });
-  document.getElementById('sizeXXL').addEventListener('click', () => {
-    selectedSize = 'XX-Large';
-    updateSummary();
-  });
-
-  // Event listener for design selection
-  document.querySelectorAll('#rotating-design-selector .image-holder').forEach((imageHolder) => {
-    imageHolder.addEventListener('click', (event) => {
-      // Get the design based on which image was clicked
-      const clickedImage = event.target.closest('.image-holder').querySelector('.display');
-      const designAlt = clickedImage ? clickedImage.alt : '';
-      selectedDesignName = designAlt; // Set the selected design
-      updateSummary();
-    });
-  });
-
-  // Event listener for quantity input
-  document.getElementById('selectedQuantity').addEventListener('input', () => {
-    selectedQuantity = document.getElementById('selectedQuantity').value;
-    updateSummary();
-  });
-
-  // Function to update the summary table
-  function updateSummary() {
-    document.getElementById('selectedColor').textContent = selectedColor;
-    document.getElementById('selectedSize').textContent = selectedSize;
-    document.getElementById('selectedSide').textContent = selectedSide;
-    document.getElementById('selectedQuantity').value = selectedQuantity;
-
-    // Update the design name in the table
-    document.getElementById('selectedDesignName').textContent = selectedDesignName;
+      #boxLid .section a {
+          font-size: 0.9em; /* Smaller buttons for very small screens */
+      }
   }
+</style>
 
-  // Call updateSummary initially to display default values
-  updateSummary();
-</script>
-</div>
 
-<div class="section" id="boxLid" style="border: 1px solid #ccc; position: relative; z-index: 1000; background: url('img/cart.png') no-repeat center center; background-size: cover; color: rgb(244, 240, 240); padding: 60px 20px; text-align: center; width: 100%; box-sizing: border-box; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); overflow: hidden;">
-  <div style="max-width: 500px; margin: 0 auto; padding: 20px; border-radius: 10px;">
-      <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;">Ready to Wrap It Up?</div>
-      <p style="font-size: 1.2em; margin-bottom: 30px;">
-          Get your T-shirt customized and delivered to your doorstep.
-      </p>
-      <a href="tshirt (razorpay)/index.html" style="display: inline-block; padding: 15px 30px; font-size: 1em; font-weight: bold; color: #000; background: #fff; border-radius: 5px; text-decoration: none; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);">
-          <button style="border: #f0f0f0; background: #fff;" id="go-to-cart" onclick="sendCartData()">Go to Cart</button>
-      </a>
-      
-
-  </div>
-</div>
 <!-- 
 <div class="section" id="boxLid" style="
     position: relative;

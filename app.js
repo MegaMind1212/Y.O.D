@@ -79,7 +79,7 @@ const initialPosition = { x: 0, y: -1.5, z: 0 }; // Updated starting y value for
 const initialRotation = { x: 0, y: 0, z: 0 };
 
 const modelMove = () => {
-  const isMobile = window.innerWidth <= 768; // Check if it's mobile
+  const isMobile = window.innerWidth <= 768; // Check if it's mobilel
   const sections = document.querySelectorAll('.section');
   let currentSection = null;
 
@@ -472,3 +472,8 @@ function updateSideSelection() {
   // Update only the side in the summary table
   updateSideSelection();
 });
+
+
+
+
+
